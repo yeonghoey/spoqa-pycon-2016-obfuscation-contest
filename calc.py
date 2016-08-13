@@ -3,8 +3,8 @@ import sys
 
 
 def ___(r, sub, ops):
-    a = list(map(lambda _: (globals()['__'](), eval(str(r)+_+str(eval(sub)))), list(filter(lambda __: __ == globals()['_'](), ops))))
-    return ___(sum(map(lambda _: _[1], a)), sub, ops) if any(a) else r
+    a = list(map(lambda _: _[1], list(map(lambda _: (globals()['__'](), eval(str(r)+_+str(eval(sub)))), list(filter(lambda __: __ == globals()['_'](), ops))))))
+    return ___(sum(a), sub, ops) if a else r
 
 
 def ____():
