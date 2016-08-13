@@ -10,14 +10,14 @@ def ___(r, sub, ops):
 def ____():
     global _, __
     l = _()
-    a = list(map(lambda _: (__(), eval(_+str(____()))), filter(lambda _: _ == l, '+-')))
+    a = list(map(lambda _: (globals()['__'](), eval(_+str(____()))), filter(lambda _: _ == l, '+-')))
     if a: return sum(map(lambda _: _[1], a))
 
-    f = lambda _: (__(), float(_.group(0))) if _ else (_, _)
+    f = lambda _: (globals()['__'](), float(_.group(0))) if _ else (_, _)
     b, c = f(re.match(r'[\d.]+', l))
     if c: return c
 
-    return (__(), ___(___(____(), '____()', '*/'), '___(____(), "____()", "*/")', '+-'), (None() if _() != ')' else __()))[1] if l == '(' else None()
+    return (globals()['__'](), ___(___(____(), '____()', '*/'), '___(____(), "____()", "*/")', '+-'), (None() if _() != ')' else globals()['__']()))[1] if l == '(' else None()
 
 
 c, t = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(sys.argv[1]))
