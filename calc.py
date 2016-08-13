@@ -2,11 +2,8 @@ import re
 import sys
 
 
-
 def ___(r, sub, ops):
-    global _, __
-    l = _()
-    a = list(map(lambda _: (__(), eval(str(r)+_+str(eval(sub)))), filter(lambda _: _ == l, ops)))
+    a = list(map(lambda _: (globals()['__'](), eval(str(r)+_+str(eval(sub)))), list(filter(lambda __: __ == globals()['_'](), ops))))
     return ___(sum(map(lambda _: _[1], a)), sub, ops) if any(a) else r
 
 
