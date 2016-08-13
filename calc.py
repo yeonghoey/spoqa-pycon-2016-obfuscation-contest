@@ -28,10 +28,10 @@ def factor():
     b, c = f(re.match(r'[\d.]+', l))
     if c: return c
 
-    return (__(), ___(repeat_term(factor()), 'repeat_term(factor())', '+-'), (None() if _() != ')' else __()))[1] if l == '(' else None()
+    return (__(), ___(___(factor(), 'factor()', '*/'), '___(factor(), "factor()", "*/")', '+-'), (None() if _() != ')' else __()))[1] if l == '(' else None()
 
 
 c, t = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(sys.argv[1]))
 _, __ = (lambda: c['_'], lambda: c.update({'_':'_'}) if not t['_'] else (c.update({'_': t['_'][0]}), t.update({'_': (t['_'][1:])})))
-__(); r = ___(repeat_term(factor()), 'repeat_term(factor())', '+-')
+__(); r = ___(___(factor(), 'factor()', '*/'),  '___(factor(), "factor()", "*/")', '+-')
 print(r) if _()=='_' else None()
