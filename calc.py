@@ -8,8 +8,7 @@ def ___(r, sub, ops):
 
 
 def ____():
-    global _, __
-    l = _()
+    l = globals()['_']()
     a = list(map(lambda _: (globals()['__'](), eval(_+str(____()))), filter(lambda _: _ == l, '+-')))
     if a: return sum(map(lambda _: _[1], a))
 
@@ -17,7 +16,7 @@ def ____():
     b, c = f(re.match(r'[\d.]+', l))
     if c: return c
 
-    return (globals()['__'](), ___(___(____(), '____()', '*/'), '___(____(), "____()", "*/")', '+-'), (None() if _() != ')' else globals()['__']()))[1] if l == '(' else None()
+    return (globals()['__'](), ___(___(____(), '____()', '*/'), '___(____(), "____()", "*/")', '+-'), (None() if globals()['_']() != ')' else globals()['__']()))[1] if l == '(' else None()
 
 
 c, t = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(sys.argv[1]))
