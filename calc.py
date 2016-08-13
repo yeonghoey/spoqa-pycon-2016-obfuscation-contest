@@ -4,11 +4,9 @@ import sys
 
 def _(stream):
     t, c = [(lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream)], [None]
-    g = lambda: c[0]
-    def ____():
-        c[0], t[0] = ('_', t) if not t[0] else (t[0][0], t[0][1:])
-        return ____
-    return g, ____
+    g = lambda: c[-1]
+    n = lambda: c.append('_') if not t[-1] else (c.append(t[-1][0]), t.append(t[-1][1:]))
+    return g, n
 
 
 def expr(g, n):
@@ -44,6 +42,6 @@ def factor(g, n):
     return (n(), expr(g, n), (None() if g() != ')' else n()))[1] if l == '(' else None()
 
 
-_, __ = _(sys.argv[1])
-result = expr(_, __())
+_, __ = _(sys.argv[1]); __()
+result = expr(_, __)
 print(result) if _() == '_' else None()
