@@ -2,9 +2,9 @@ import re
 import sys
 
 
-def ___(______, sub, ops):
-    _____ = list(map(lambda _: _[1], list(map(lambda _: (globals()['__'](), eval(str(______)+_+str(eval(sub)))), list(filter(lambda __: __ == globals()['_'](), ops))))))
-    return ___(sum(_____), sub, ops) if _____ else ______
+def ___(______, _______, ops):
+    _____ = list(map(lambda _: _[1], list(map(lambda _: (globals()['__'](), eval(str(______)+_+str(eval(_______)))), list(filter(lambda __: __ == globals()['_'](), ops))))))
+    return ___(sum(_____), _______, ops) if _____ else ______
 
 
 def ____():
