@@ -4,10 +4,7 @@ import sys
 
 def _(stream):
     t, c = [(lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream)], [None]
-    g = lambda: c[-1]
-    n = lambda: c.append('_') if not t[-1] else (c.append(t[-1][0]), t.append(t[-1][1:]))
-    return g, n
-
+    return (lambda: c[-1], lambda: c.append('_') if not t[-1] else (c.append(t[-1][0]), t.append(t[-1][1:])))
 
 def expr(g, n):
     r = term(g, n)
