@@ -2,10 +2,9 @@ import re
 import sys
 
 
-def tokenize(stream):
-    pattern = '([\d.]+|[-+*/()])'
-    for lexeme in re.findall(pattern, stream):
-        yield lexeme
+globals().update({
+    'tokenize': lambda _: iter(re.findall('([\d.]+|[-+*/()])', _)),
+})
 
 
 class Tokenizer(object):
