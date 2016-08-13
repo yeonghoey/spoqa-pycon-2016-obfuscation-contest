@@ -3,9 +3,6 @@ import sys
 
 
 
-def expr():
-    return repeat_expr(term())
-
 def repeat_expr(r):
     global _, __
     l = _()
@@ -34,7 +31,7 @@ def factor():
     b, c = f(re.match(r'[\d.]+', l))
     if c: return c
 
-    return (__(), expr(), (None() if _() != ')' else __()))[1] if l == '(' else None()
+    return (__(), repeat_expr(term()), (None() if _() != ')' else __()))[1] if l == '(' else None()
 
 
 c, t = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(sys.argv[1]))
