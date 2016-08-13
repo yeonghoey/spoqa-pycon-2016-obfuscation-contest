@@ -2,15 +2,9 @@ import re
 import sys
 
 
-globals().update({
-    'tokenize': lambda _: re.findall('([\d.]+|[-+*/()])', _),
-})
-
-
-def tokenizer(stream):
-    t = tokenize(stream)
-    c = None
-    def g(): return c
+def _(stream):
+    t, c = (lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream), None
+    g = lambda: c
     def n():
         nonlocal t, c
         c, t = ('_', t) if not t else (t[0], t[1:])
@@ -51,6 +45,6 @@ def factor(g, n):
     return (n(), expr(g, n), (None() if g() != ')' else n()))[1] if l == '(' else None()
 
 
-_, __ = tokenizer(sys.argv[1])
+_, __ = _(sys.argv[1])
 result = expr(_, __())
 print(result) if _() == '_' else None()
