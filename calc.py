@@ -14,6 +14,7 @@ def tokenizer(stream):
     def n():
         nonlocal t, c
         c, t = ('_', t) if not t else (t[0], t[1:])
+        return n
     return g, n
 
 
@@ -50,7 +51,6 @@ def factor(g, n):
     return (n(), expr(g, n), (None() if g() != ')' else n()))[1] if l == '(' else None()
 
 
-g, n = tokenizer(sys.argv[1])
-n()
-result = expr(g, n)
-print(result) if g() == '_' else None()
+_, __ = tokenizer(sys.argv[1])
+result = expr(_, __())
+print(result) if _() == '_' else None()
