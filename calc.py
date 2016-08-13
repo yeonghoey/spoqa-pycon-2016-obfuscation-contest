@@ -3,13 +3,12 @@ import sys
 
 
 def _(stream):
-    _, __ = (lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream), None
-    ___ = lambda: __
+    t, c = [(lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream)], [None]
+    g = lambda: c[0]
     def ____():
-        nonlocal _, __
-        __, _ = ('_', _) if not _ else (_[0], _[1:])
+        c[0], t[0] = ('_', t) if not t[0] else (t[0][0], t[0][1:])
         return ____
-    return ___, ____
+    return g, ____
 
 
 def expr(g, n):
