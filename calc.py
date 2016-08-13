@@ -52,13 +52,10 @@ def factor(g, n):
 
 if __name__ == '__main__':
     g, n = tokenizer(sys.argv[1])
-    try:
-        n()
-        result = expr(g, n)
-        l = g()
-        if l == '_':
-            print(result)
-        else:
-            raise Exception()
-    except StopIteration:
-        pass
+    n()
+    result = expr(g, n)
+    l = g()
+    if l == '_':
+        print(result)
+    else:
+        None()
