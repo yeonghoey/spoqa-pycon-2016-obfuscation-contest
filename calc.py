@@ -3,11 +3,11 @@ import sys
 
 
 def _(stream):
-    t, c = (lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream), None
-    g = lambda: c
+    _, __ = (lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream), None
+    g = lambda: __
     def n():
-        nonlocal t, c
-        c, t = ('_', t) if not t else (t[0], t[1:])
+        nonlocal _, __
+        __, _ = ('_', _) if not _ else (_[0], _[1:])
         return n
     return g, n
 
