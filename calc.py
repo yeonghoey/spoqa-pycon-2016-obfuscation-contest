@@ -7,8 +7,7 @@ _, __ = (lambda: c['_'], lambda: c.update({'_':'_'}) if not t['_'] else (c.updat
 __()
 
 def expr():
-    r = term()
-    return repeat_expr(r)
+    return repeat_expr(term())
 
 def repeat_expr(r):
     global _, __
@@ -18,9 +17,7 @@ def repeat_expr(r):
 
 
 def term():
-    global _, __
-    r = factor()
-    return repeat_term(r)
+    return repeat_term(factor())
 
 
 def repeat_term(r):
