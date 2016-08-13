@@ -13,7 +13,7 @@ def tokenizer(stream):
     def g(): return c
     def n():
         nonlocal t, c
-        c, t = ('eol', t) if not t else (t[0], t[1:])
+        c, t = ('_', t) if not t else (t[0], t[1:])
     return g, n
 
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         n()
         result = expr(g, n)
         l = g()
-        if l == 'eol':
+        if l == '_':
             print(result)
         else:
             raise Exception()
