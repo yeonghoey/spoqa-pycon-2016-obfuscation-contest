@@ -4,12 +4,12 @@ import sys
 
 def _(stream):
     _, __ = (lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream), None
-    g = lambda: __
-    def n():
+    ___ = lambda: __
+    def ____():
         nonlocal _, __
         __, _ = ('_', _) if not _ else (_[0], _[1:])
-        return n
-    return g, n
+        return ____
+    return ___, ____
 
 
 def expr(g, n):
