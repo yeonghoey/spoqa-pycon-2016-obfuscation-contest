@@ -53,5 +53,4 @@ def factor(g, n):
 g, n = tokenizer(sys.argv[1])
 n()
 result = expr(g, n)
-l = g()
-print(result) if l == '_' else None()
+print(result) if g() == '_' else None()
