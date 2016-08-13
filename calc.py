@@ -50,12 +50,11 @@ def factor(g, n):
     return (n(), expr(g, n), (None() if g() != ')' else n()))[1] if l == '(' else None()
 
 
-if __name__ == '__main__':
-    g, n = tokenizer(sys.argv[1])
-    n()
-    result = expr(g, n)
-    l = g()
-    if l == '_':
-        print(result)
-    else:
-        None()
+g, n = tokenizer(sys.argv[1])
+n()
+result = expr(g, n)
+l = g()
+if l == '_':
+    print(result)
+else:
+    None()
