@@ -54,7 +54,4 @@ g, n = tokenizer(sys.argv[1])
 n()
 result = expr(g, n)
 l = g()
-if l == '_':
-    print(result)
-else:
-    None()
+print(result) if l == '_' else None()
