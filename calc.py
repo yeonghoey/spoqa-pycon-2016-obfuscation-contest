@@ -3,14 +3,14 @@ import sys
 
 
 def ___(r, sub, ops):
-    a = list(map(lambda _: _[1], list(map(lambda _: (globals()['__'](), eval(str(r)+_+str(eval(sub)))), list(filter(lambda __: __ == globals()['_'](), ops))))))
-    return ___(sum(a), sub, ops) if a else r
+    _____ = list(map(lambda _: _[1], list(map(lambda _: (globals()['__'](), eval(str(r)+_+str(eval(sub)))), list(filter(lambda __: __ == globals()['_'](), ops))))))
+    return ___(sum(_____), sub, ops) if _____ else r
 
 
 def ____():
     l = globals()['_']()
-    a = list(map(lambda _: (globals()['__'](), eval(_+str(____()))), filter(lambda _: _ == l, '+-')))
-    if a: return sum(map(lambda _: _[1], a))
+    _____ = list(map(lambda _: (globals()['__'](), eval(_+str(____()))), filter(lambda _: _ == l, '+-')))
+    if _____: return sum(map(lambda _: _[1], _____))
 
     f = lambda _: (globals()['__'](), float(_.group(0))) if _ else (_, _)
     b, c = f(re.match(r'[\d.]+', l))
