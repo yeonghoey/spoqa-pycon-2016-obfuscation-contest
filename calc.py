@@ -3,7 +3,7 @@ import sys
 
 
 def _(stream):
-    t, c = dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream)), dict(_=None)
+    c, t = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream))
     return (lambda: c['_'], lambda: c.update({'_':'_'}) if not t['_'] else (c.update({'_': t['_'][0]}), t.update({'_': (t['_'][1:])})))
 
 
