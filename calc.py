@@ -43,10 +43,9 @@ def factor(g, n):
     a = list(map(lambda _: (n(), eval(_+str(factor(g, n)))), filter(lambda _: _ == l, '+-')))
     if a: return sum(map(lambda _: _[1], a))
 
-    m = re.match(r'[\d.]+', l)
-    if m is not None:
-        n()
-        return float(m.group(0))
+    f = lambda _: (n(), float(_.group(0))) if _ else (_, _)
+    b, c = f(re.match(r'[\d.]+', l))
+    if c: return c
 
     if l == '(':
         n()
@@ -71,6 +70,6 @@ if __name__ == '__main__':
             raise Exception()
     except StopIteration:
         pass
-    except Exception as e:
-        print(e)
-        sys.exit(1)
+    # except Exception as e:
+    #     print(e)
+    #     sys.exit(1)
