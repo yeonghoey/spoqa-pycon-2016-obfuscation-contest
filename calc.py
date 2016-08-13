@@ -3,8 +3,9 @@ import sys
 
 
 def _(stream):
-    t, c = [(lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream)], [None]
-    return (lambda: c[-1], lambda: c.append('_') if not t[-1] else (c.append(t[-1][0]), t.append(t[-1][1:])))
+    t, c = dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(stream)), dict(_=None)
+    return (lambda: c['_'], lambda: c.update({'_':'_'}) if not t['_'] else (c.update({'_': t['_'][0]}), t.update({'_': (t['_'][1:])})))
+
 
 def expr(g, n):
     r = term(g, n)
@@ -39,6 +40,7 @@ def factor(g, n):
     return (n(), expr(g, n), (None() if g() != ')' else n()))[1] if l == '(' else None()
 
 
-_, __ = _(sys.argv[1]); __()
+_, __ = _(sys.argv[1])
+__()
 result = expr(_, __)
 print(result) if _() == '_' else None()
