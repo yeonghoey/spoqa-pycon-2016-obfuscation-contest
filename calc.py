@@ -47,15 +47,15 @@ def factor(g, n):
     b, c = f(re.match(r'[\d.]+', l))
     if c: return c
 
-    if l == '(':
-        n()
-        ret = expr(g, n)
-        if g() != ')':
-            raise Exception()
-        n()
-        return ret
+    return (n(), expr(g, n), (None() if g() != ')' else n()))[1] if l == '(' else None()
+        # n()
+        # ret = expr(g, n)
+        # if g() != ')':
+        #     raise Exception()
+        # n()
+        # return ret
 
-    raise Exception()
+    # raise Exception()
 
 
 if __name__ == '__main__':
