@@ -70,6 +70,3 @@ if __name__ == '__main__':
             raise Exception()
     except StopIteration:
         pass
-    # except Exception as e:
-    #     print(e)
-    #     sys.exit(1)
