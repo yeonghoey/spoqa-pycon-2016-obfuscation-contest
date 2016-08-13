@@ -28,18 +28,14 @@ def repeat_expr(g, n, r):
 
 
 def term(g, n):
-    ret = factor(g, n)
-    while True:
-        l = g()
-        if l == '*':
-            n()
-            ret = ret * factor(g, n)
-        elif l == '/':
-            n()
-            ret = ret / factor(g, n)
-        else:
-            break
-    return ret
+    r = factor(g, n)
+    return repeat_term(g, n, r)
+
+
+def repeat_term(g, n, r):
+    l = g()
+    a = list(map(lambda _: (n(), eval(str(r)+_+str(factor(g, n)))), filter(lambda _: _ == l, '*/')))
+    return repeat_term(g, n, sum(map(lambda _: _[1], a))) if any(a) else r
 
 
 def factor(g, n):
