@@ -48,14 +48,6 @@ def factor(g, n):
     if c: return c
 
     return (n(), expr(g, n), (None() if g() != ')' else n()))[1] if l == '(' else None()
-        # n()
-        # ret = expr(g, n)
-        # if g() != ')':
-        #     raise Exception()
-        # n()
-        # return ret
-
-    # raise Exception()
 
 
 if __name__ == '__main__':
