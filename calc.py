@@ -16,42 +16,25 @@ def tokenizer(stream):
         c, t = ('eol', t) if not t else (t[0], t[1:])
     return g, n
 
-class Tokenizer(object):
-    def __init__(self, stream):
-        self.tokens = iter(tokenize(stream))
-        self.current = None
-
-    def next(self):
-        try:
-            self.current = next(self.tokens)
-        except StopIteration:
-            self.current = 'eol'
-        return self.current
-
 
 def expr(g, n):
-    ret = term(g, n)
-    while True:
-        lexeme = g()
-        if lexeme == '+':
-            n()
-            ret = ret + term(g, n)
-        elif lexeme == '-':
-            n()
-            ret = ret - term(g, n)
-        else:
-            break
-    return ret
+    r = term(g, n)
+    return repeat_expr(g, n, r)
+
+def repeat_expr(g, n, r):
+    l = g()
+    a = list(map(lambda _: (n(), eval(str(r)+_+str(term(g, n)))), filter(lambda _: _ == l, '+-')))
+    return repeat_expr(g, n, sum(map(lambda _: _[1], a))) if any(a) else r
 
 
 def term(g, n):
     ret = factor(g, n)
     while True:
-        lexeme = g()
-        if lexeme == '*':
+        l = g()
+        if l == '*':
             n()
             ret = ret * factor(g, n)
-        elif lexeme == '/':
+        elif l == '/':
             n()
             ret = ret / factor(g, n)
         else:
@@ -60,19 +43,19 @@ def term(g, n):
 
 
 def factor(g, n):
-    lexeme = g()
-    if lexeme == '+':
+    l = g()
+    if l == '+':
         n()
         return factor(g, n)
-    if lexeme == '-':
+    if l == '-':
         n()
         return -factor(g, n)
-    m = re.match(r'[\d.]+', lexeme)
+    m = re.match(r'[\d.]+', l)
     if m is not None:
         n()
         return float(m.group(0))
 
-    if lexeme == '(':
+    if l == '(':
         n()
         ret = expr(g, n)
         if g() != ')':
@@ -88,8 +71,8 @@ if __name__ == '__main__':
     try:
         n()
         result = expr(g, n)
-        lexeme = g()
-        if lexeme == 'eol':
+        l = g()
+        if l == 'eol':
             print(result)
         else:
             raise Exception()
