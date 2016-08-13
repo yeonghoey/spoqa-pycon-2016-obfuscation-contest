@@ -9,8 +9,7 @@ def ____():
     _____ = list(map(lambda _: (globals()['__'](), eval(_+str(____()))), filter(lambda _: _ == _______, '+-')))
     if _____: return sum(map(lambda _: _[1], _____))
 
-    f = lambda _: (globals()['__'](), float(_.group(0))) if _ else (_, _)
-    b, c = f(re.match(r'[\d.]+', _______))
+    b, c = (lambda _: (globals()['__'](), float(_.group(0))) if _ else (_, _))(re.match(r'[\d.]+', _______))
     if c: return c
 
     return (globals()['__'](), ___(___(____(), '____()', '*/'), '___(____(), "____()", "*/")', '+-'), (None() if globals()['_']() != ')' else globals()['__']()))[1] if _______ == '(' else None()
