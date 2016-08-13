@@ -3,13 +3,22 @@ import sys
 
 
 globals().update({
-    'tokenize': lambda _: iter(re.findall('([\d.]+|[-+*/()])', _)),
+    'tokenize': lambda _: re.findall('([\d.]+|[-+*/()])', _),
 })
 
 
+def tokenizer(stream):
+    t = tokenize(stream)
+    c = None
+    def g(): return c
+    def n():
+        nonlocal t, c
+        c, t = ('eol', t) if not t else (t[0], t[1:])
+    return g, n
+
 class Tokenizer(object):
     def __init__(self, stream):
-        self.tokens = tokenize(stream)
+        self.tokens = iter(tokenize(stream))
         self.current = None
 
     def next(self):
@@ -20,66 +29,66 @@ class Tokenizer(object):
         return self.current
 
 
-def expr(tokenizer):
-    ret = term(tokenizer)
+def expr(g, n):
+    ret = term(g, n)
     while True:
-        lexeme = tokenizer.current
+        lexeme = g()
         if lexeme == '+':
-            tokenizer.next()
-            ret = ret + term(tokenizer)
+            n()
+            ret = ret + term(g, n)
         elif lexeme == '-':
-            tokenizer.next()
-            ret = ret - term(tokenizer)
+            n()
+            ret = ret - term(g, n)
         else:
             break
     return ret
 
 
-def term(tokenizer):
-    ret = factor(tokenizer)
+def term(g, n):
+    ret = factor(g, n)
     while True:
-        lexeme = tokenizer.current
+        lexeme = g()
         if lexeme == '*':
-            tokenizer.next()
-            ret = ret * factor(tokenizer)
+            n()
+            ret = ret * factor(g, n)
         elif lexeme == '/':
-            tokenizer.next()
-            ret = ret / factor(tokenizer)
+            n()
+            ret = ret / factor(g, n)
         else:
             break
     return ret
 
 
-def factor(tokenizer):
-    lexeme = tokenizer.current
+def factor(g, n):
+    lexeme = g()
     if lexeme == '+':
-        tokenizer.next()
-        return factor(tokenizer)
+        n()
+        return factor(g, n)
     if lexeme == '-':
-        tokenizer.next()
-        return -factor(tokenizer)
+        n()
+        return -factor(g, n)
     m = re.match(r'[\d.]+', lexeme)
     if m is not None:
-        tokenizer.next()
+        n()
         return float(m.group(0))
 
     if lexeme == '(':
-        tokenizer.next()
-        ret = expr(tokenizer)
-        if tokenizer.current != ')':
+        n()
+        ret = expr(g, n)
+        if g() != ')':
             raise Exception()
-        tokenizer.next()
+        n()
         return ret
 
     raise Exception()
 
 
 if __name__ == '__main__':
-    tokenizer = Tokenizer(sys.argv[1])
+    g, n = tokenizer(sys.argv[1])
     try:
-        tokenizer.next()
-        result = expr(tokenizer)
-        lexeme = tokenizer.current
+        n()
+        result = expr(g, n)
+        lexeme = g()
         if lexeme == 'eol':
             print(result)
         else:
