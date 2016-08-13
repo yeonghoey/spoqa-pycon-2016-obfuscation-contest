@@ -8,14 +8,13 @@ def ____():
     _______ = globals()['_']()
     _____ = list(map(lambda _: (globals()['__'](), eval(_+str(____()))), filter(lambda _: _ == _______, '+-')))
     if _____: return sum(map(lambda _: _[1], _____))
-
-    b, c = (lambda _: (globals()['__'](), float(_.group(0))) if _ else (_, _))(re.match(r'[\d.]+', _______))
-    if c: return c
+    _________, ________ = (lambda _: (globals()['__'](), float(_.group(0))) if _ else (_, _))(re.match(r'[\d.]+', _______))
+    if ________: return ________
 
     return (globals()['__'](), ___(___(____(), '____()', '*/'), '___(____(), "____()", "*/")', '+-'), (None() if globals()['_']() != ')' else globals()['__']()))[1] if _______ == '(' else None()
 
 
-c, t = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(sys.argv[1]))
-_, __ = (lambda: c['_'], lambda: c.update({'_':'_'}) if not t['_'] else (c.update({'_': t['_'][0]}), t.update({'_': (t['_'][1:])})))
+_________, __________ = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(sys.argv[1]))
+_, __ = (lambda: _________['_'], lambda: _________.update({'_':'_'}) if not __________['_'] else (_________.update({'_': __________['_'][0]}), __________.update({'_': (__________['_'][1:])})))
 __(); ______ = ___(___(____(), '____()', '*/'),  '___(____(), "____()", "*/")', '+-')
 print(______) if _()=='_' else None()
