@@ -40,12 +40,9 @@ def repeat_term(g, n, r):
 
 def factor(g, n):
     l = g()
-    if l == '+':
-        n()
-        return factor(g, n)
-    if l == '-':
-        n()
-        return -factor(g, n)
+    a = list(map(lambda _: (n(), eval(_+str(factor(g, n)))), filter(lambda _: _ == l, '+-')))
+    if a: return sum(map(lambda _: _[1], a))
+
     m = re.match(r'[\d.]+', l)
     if m is not None:
         n()
