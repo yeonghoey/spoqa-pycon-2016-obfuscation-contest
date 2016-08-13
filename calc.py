@@ -2,9 +2,6 @@ import re
 import sys
 
 
-c, t = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(sys.argv[1]))
-_, __ = (lambda: c['_'], lambda: c.update({'_':'_'}) if not t['_'] else (c.update({'_': t['_'][0]}), t.update({'_': (t['_'][1:])})))
-__()
 
 def expr():
     return repeat_expr(term())
@@ -40,5 +37,7 @@ def factor():
     return (__(), expr(), (None() if _() != ')' else __()))[1] if l == '(' else None()
 
 
-result = expr()
-print(result) if _() == '_' else None()
+c, t = dict(_=None), dict(_=(lambda _: re.findall('([\d.]+|[-+*/()])', _))(sys.argv[1]))
+_, __ = (lambda: c['_'], lambda: c.update({'_':'_'}) if not t['_'] else (c.update({'_': t['_'][0]}), t.update({'_': (t['_'][1:])})))
+__(); r = repeat_expr(term())
+print(r) if _()=='_' else None()
